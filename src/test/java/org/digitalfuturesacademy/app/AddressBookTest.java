@@ -25,4 +25,26 @@ public class AddressBookTest {
             );
         }
     }
+
+    @Nested
+    @DisplayName("Address Book AddContact Tests")
+    class AddressBookAddContactTests {
+        private AddressBook addressBook;
+
+        @BeforeEach
+        void setUp() {
+            addressBook = new AddressBook();
+        }
+    }
+
+    @Nested
+    @DisplayName("Address Book removeContact Tests")
+    class AddressBookRemoveContactTests {
+        private AddressBook addressBook;
+
+        @BeforeEach
+        void setUp() {
+            addressBook = new AddressBook();
+        }
+    }
 }

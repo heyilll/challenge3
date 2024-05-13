@@ -15,7 +15,13 @@ public class AddressBook {
     }
 
     public void addContact(Contact contact) {
-        // Implementation
+        Validator.validateContact(contact);
+        this.contacts.add(contact);
+    }
+
+    public void removeContact(Contact contact) {
+        Validator.validateContact(contact);
+        this.contacts.remove(contact);
     }
 
     public List<Contact> getContacts() {
