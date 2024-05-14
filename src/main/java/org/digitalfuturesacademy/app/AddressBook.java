@@ -2,6 +2,7 @@ package org.digitalfuturesacademy.app;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public class AddressBook {
     private List<Contact> contacts;
@@ -20,6 +21,9 @@ public class AddressBook {
     }
 
     public void removeContact(Contact contact) {
+        if (contacts.isEmpty()) {
+            throw new NoSuchElementException("No contacts stored.");
+        }
         Validator.validateContact(contact);
         this.contacts.remove(contact);
     }

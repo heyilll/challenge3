@@ -103,7 +103,7 @@ public class ValidatorTest {
         }
 
         @Test
-        @DisplayName("Test validateContact throws IllegalArgumentException when contact phone number is empty")
+        @DisplayName("Test validateContact throws IllegalArgumentException when contact phone number is wrong")
         public void testValidateContactThrowsIllegalArgumentExceptionWhenContactPhoneNumberIsWrong() {
             // Arrange
             Contact contact = mock(Contact.class);
@@ -116,7 +116,7 @@ public class ValidatorTest {
         }
 
         @Test
-        @DisplayName("Test validateContact throws IllegalArgumentException when contact email is empty")
+        @DisplayName("Test validateContact throws IllegalArgumentException when contact email is wrong")
         public void testValidateContactThrowsIllegalArgumentExceptionWhenContactEmailIsWrong() {
             // Arrange
             Contact contact = mock(Contact.class);
@@ -129,7 +129,7 @@ public class ValidatorTest {
         }
 
         @Test
-        @DisplayName("Test validateContact throws IllegalArgumentException when contact phone number is empty")
+        @DisplayName("Test validateContact works when contact phone number is right")
         public void testValidateContactWorksWhenContactPhoneNumberIsRight() {
             // Arrange
             Contact contact = mock(Contact.class);
@@ -142,7 +142,7 @@ public class ValidatorTest {
         }
 
         @Test
-        @DisplayName("Test validateContact throws IllegalArgumentException when contact email is empty")
+        @DisplayName("Test validateContact works when contact email is right")
         public void testValidateContactWorksWhenContactEmailIsRight() {
             // Arrange
             Contact contact = mock(Contact.class);
