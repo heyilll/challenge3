@@ -45,6 +45,7 @@ public class AddressBookTest {
         public void testAddContactWorksWhenContactIsCorrect() {
             // Arrange
             Contact contact = mock(Contact.class);
+            when(contact.getName()).thenReturn("John Smith");
             when(contact.getPhoneNumber()).thenReturn("07912345678");
             when(contact.getEmail()).thenReturn("example@e.com");
 
@@ -63,6 +64,14 @@ public class AddressBookTest {
         @BeforeEach
         void setUp() {
             testAddressBook = new AddressBook();
+            Contact contact = mock(Contact.class);
+            when(contact.getName()).thenReturn("John Smith");
+            when(contact.getPhoneNumber()).thenReturn("07912345678");
+            when(contact.getEmail()).thenReturn("example@e.com");
+            List<Contact> testContacts = new ArrayList<>();
+            testContacts.add(contact);
+
+            testAddressBook.setContacts(testContacts);
         }
 
         @Test
@@ -70,12 +79,9 @@ public class AddressBookTest {
         public void testRemoveContactWorksWhenContactIsCorrect() {
             // Arrange
             Contact contact = mock(Contact.class);
+            when(contact.getName()).thenReturn("John Smith");
             when(contact.getPhoneNumber()).thenReturn("07912345678");
             when(contact.getEmail()).thenReturn("example@e.com");
-            List<Contact> testContacts = new ArrayList<Contact>();
-            testContacts.add(contact);
-
-            testAddressBook.setContacts(testContacts);
             // Act
             testAddressBook.removeContact(contact);
             // Assert
@@ -87,6 +93,7 @@ public class AddressBookTest {
         public void testRemoveContactThrowsExceptionWhenContactsIsEmpty() {
             // Arrange
             Contact contact = mock(Contact.class);
+            when(contact.getName()).thenReturn("John Smith");
             when(contact.getPhoneNumber()).thenReturn("07912345678");
             when(contact.getEmail()).thenReturn("example@e.com");
             // Act
@@ -94,6 +101,129 @@ public class AddressBookTest {
             assertThrows(NoSuchElementException.class, () -> {
                 testAddressBook.removeContact(contact);
             });
+        }
+    }
+
+    @Nested
+    @DisplayName("Address Book editContact Tests")
+    class AddressBookEditContactTests {
+        private AddressBook testAddressBook;
+
+        @BeforeEach
+        void setUp() {
+            testAddressBook = new AddressBook();
+            Contact contact = mock(Contact.class);
+            when(contact.getName()).thenReturn("John Smith");
+            when(contact.getPhoneNumber()).thenReturn("07912345678");
+            when(contact.getEmail()).thenReturn("example@e.com");
+            List<Contact> testContacts = new ArrayList<>();
+            testContacts.add(contact);
+
+            testAddressBook.setContacts(testContacts);
+        }
+
+        @Test
+        @DisplayName("Test editContact works when contact is correct")
+        public void testEditContactWorksWhenContactIsCorrect() {
+            // Arrange
+            Contact contact = mock(Contact.class);
+            when(contact.getName()).thenReturn("John Smith");
+            when(contact.getPhoneNumber()).thenReturn("07912345678");
+            when(contact.getEmail()).thenReturn("example@e.com");
+
+            Contact testContact = mock(Contact.class);
+            when(testContact.getName()).thenReturn("John Smith");
+            when(testContact.getPhoneNumber()).thenReturn("07912345678");
+            when(testContact.getEmail()).thenReturn("example@e.com");
+            // Act
+            testAddressBook.editContact(contact, testContact);
+            // Assert
+            assertTrue(testAddressBook.getContacts().contains(testContact));
+        }
+
+        @Test
+        @DisplayName("Test editContact works when old contact is not correct")
+        public void testEditContactWorksWhenOldContactIsNotCorrect() {
+            // Arrange
+            Contact contact = mock(Contact.class);
+            when(contact.getName()).thenReturn("Jssssssssss");
+            when(contact.getPhoneNumber()).thenReturn("sssssssssssss");
+            when(contact.getEmail()).thenReturn("sssssssssssssssss");
+
+            Contact testContact = mock(Contact.class);
+            when(testContact.getName()).thenReturn("Tyler Smith");
+            when(testContact.getPhoneNumber()).thenReturn("07912345678");
+            when(testContact.getEmail()).thenReturn("example@error.com");
+            // Act
+            // Assert
+            assertThrows(IllegalArgumentException.class, () -> {
+                testAddressBook.editContact(contact, testContact);
+            });
+        }
+
+        @Test
+        @DisplayName("Test editContact works when new contact is not correct")
+        public void testEditContactWorksWhenNewContactIsNotCorrect() {
+            // Arrange
+            Contact contact = mock(Contact.class);
+            when(contact.getName()).thenReturn("John Smith");
+            when(contact.getPhoneNumber()).thenReturn("07912345678");
+            when(contact.getEmail()).thenReturn("example@e.com");
+
+            Contact testContact = mock(Contact.class);
+            when(testContact.getName()).thenReturn("ssssssssssssss");
+            when(testContact.getPhoneNumber()).thenReturn("ssssssssssssss");
+            when(testContact.getEmail()).thenReturn("ssssssssssssssssssssss");
+            // Act
+            // Assert
+            assertThrows(IllegalArgumentException.class, () -> {
+                testAddressBook.editContact(contact, testContact);
+            });
+        }
+    }
+
+    @Nested
+    @DisplayName("Address Book getAllContacts Tests")
+    class AddressBookGetAllContactsTests {
+        private AddressBook testAddressBook;
+
+        @BeforeEach
+        void setUp() {
+            testAddressBook = new AddressBook();
+            Contact contact = mock(Contact.class);
+            when(contact.getName()).thenReturn("John Smith");
+            when(contact.getPhoneNumber()).thenReturn("07912345678");
+            when(contact.getEmail()).thenReturn("example@e.com");
+            Contact contact2 = mock(Contact.class);
+            when(contact2.getName()).thenReturn("John Smith");
+            when(contact2.getPhoneNumber()).thenReturn("07912345678");
+            when(contact2.getEmail()).thenReturn("example@e.com");
+
+            List<Contact> testContacts = new ArrayList<>();
+            testContacts.add(contact);
+            testContacts.add(contact2);
+
+            testAddressBook.setContacts(testContacts);
+        }
+
+        @Test
+        @DisplayName("Test editContact works when contacts is correct")
+        public void testGetAllContactsWorksWhenContactsIsCorrect() {
+            // Arrange
+            // Act
+            // Assert
+            assertEquals(2, testAddressBook.getAllContacts().size());
+        }
+
+        @Test
+        @DisplayName("Test editContact works when contacts is empty")
+        public void testGetAllContactsWorksWhenContactsIsEmpty() {
+            // Arrange
+            List<Contact> testContacts = new ArrayList<>();
+            testAddressBook.setContacts(testContacts);
+            // Act
+            // Assert
+            assertEquals(0, testAddressBook.getAllContacts().size());
         }
     }
 }

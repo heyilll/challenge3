@@ -21,11 +21,27 @@ public class AddressBook {
     }
 
     public void removeContact(Contact contact) {
+        checkEmpty();
+        Validator.validateContact(contact);
+        this.contacts.remove(contact);
+    }
+
+    public void editContact(Contact oldcontact, Contact newcontact) {
+        checkEmpty();
+        Validator.validateContact(oldcontact);
+        Validator.validateContact(newcontact);
+        removeContact(oldcontact);
+        addContact(newcontact);
+    }
+
+    private void checkEmpty() {
         if (contacts.isEmpty()) {
             throw new NoSuchElementException("No contacts stored.");
         }
-        Validator.validateContact(contact);
-        this.contacts.remove(contact);
+    }
+
+    public List<Contact> getAllContacts() {
+        return contacts;
     }
 
     public List<Contact> getContacts() {
