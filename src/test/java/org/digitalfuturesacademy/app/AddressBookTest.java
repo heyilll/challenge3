@@ -283,8 +283,8 @@ public class AddressBookTest {
         private AddressBook testAddressBook;
 
         @Test
-        @DisplayName("Test searchContact works when contacts is correct")
-        public void testSearchContactWorksWhenContactsIsCorrect() {
+        @DisplayName("Test ConsoleInterfaceWorks")
+        public void testConsoleInterfaceWorks() {
             // Arrange
             // Act
             // Assert

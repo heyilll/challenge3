@@ -41,7 +41,7 @@ public class AddressBook {
                 return i;
             }
         }
-        throw new NoSuchElementException("No contacts stored.");
+        throw new NoSuchElementException("No such contact found.");
     }
 
     private void checkEmpty() {
