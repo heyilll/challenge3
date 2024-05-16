@@ -34,6 +34,16 @@ public class AddressBook {
         addContact(newcontact);
     }
 
+    public Contact searchContact(String name) {
+        checkEmpty();
+        for (Contact i: contacts) {
+            if (i.getName().equals(name)) {
+                return i;
+            }
+        }
+        throw new NoSuchElementException("No contacts stored.");
+    }
+
     private void checkEmpty() {
         if (contacts.isEmpty()) {
             throw new NoSuchElementException("No contacts stored.");

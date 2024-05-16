@@ -35,7 +35,7 @@ As a user, I want to forbid new contacts from having an existing contact's email
 
 | Requirement | Objects     | Properties                                                                    | Methods                                  | 
 |-------------|-------------|-------------------------------------------------------------------------------|------------------------------------------|
-| 4           | AddressBook | private List<Contact\> contacts                                               | public void editContact(Contact contact) | 
+| 3           | AddressBook | private List<Contact\> contacts                                               | public void editContact(Contact contact) | 
 |             | Contact     | private String email <br> private String name <br> private String phoneNumber |                                          |       
 
 #### Test cases
@@ -45,7 +45,7 @@ As a user, I want to be able to delete a contact from the address book, so that 
 
 | Requirement | Objects     | Properties                                                                    | Messages                                   |
 |-------------|-------------|-------------------------------------------------------------------------------|--------------------------------------------|
-| 3           | AddressBook | private List<Contact\> contacts                                               | public void removeContact(Contact contact) |
+| 4           | AddressBook | private List<Contact\> contacts                                               | public void removeContact(Contact contact) |
 |             | Contact     | private String email <br> private String name <br> private String phoneNumber |                                            |
 
 #### Test cases

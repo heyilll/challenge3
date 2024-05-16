@@ -226,4 +226,68 @@ public class AddressBookTest {
             assertEquals(0, testAddressBook.getAllContacts().size());
         }
     }
+
+    @Nested
+    @DisplayName("Address Book searchContact Tests")
+    class AddressBookSearchContactsTests {
+        private AddressBook testAddressBook;
+
+        @BeforeEach
+        void setUp() {
+            testAddressBook = new AddressBook();
+            Contact contact = mock(Contact.class);
+            when(contact.getName()).thenReturn("John Smith");
+            when(contact.getPhoneNumber()).thenReturn("07912345678");
+            when(contact.getEmail()).thenReturn("example@e.com");
+            Contact contact2 = mock(Contact.class);
+            when(contact2.getName()).thenReturn("Tyler Smith");
+            when(contact2.getPhoneNumber()).thenReturn("0795467487");
+            when(contact2.getEmail()).thenReturn("5645645e@e.com");
+
+            List<Contact> testContacts = new ArrayList<>();
+            testContacts.add(contact);
+            testContacts.add(contact2);
+            testAddressBook.setContacts(testContacts);
+        }
+
+        @Test
+        @DisplayName("Test searchContact works when contacts is correct")
+        public void testSearchContactWorksWhenContactsIsCorrect() {
+            // Arrange
+            Contact contact = mock(Contact.class);
+            when(contact.getName()).thenReturn("John Smith");
+            when(contact.getPhoneNumber()).thenReturn("07912345678");
+            when(contact.getEmail()).thenReturn("example@e.com");
+            // Act
+            // Assert
+            assertEquals(contact.getName(), testAddressBook.searchContact("John Smith").getName());
+        }
+
+        @Test
+        @DisplayName("Test searchContact works when contacts is empty")
+        public void testSearchContactWorksWhenContactsIsEmpty() {
+            // Arrange
+            List<Contact> testContacts = new ArrayList<>();
+            testAddressBook.setContacts(testContacts);
+            // Act
+            // Assert
+            assertThrows(NoSuchElementException.class, () -> {
+                testAddressBook.searchContact("John Smith");
+            });
+        }
+    }
+
+    @Nested
+    @DisplayName("Address Book Console Interface Tests")
+    class AddressBookConsoleInterfaceTests {
+        private AddressBook testAddressBook;
+
+        @Test
+        @DisplayName("Test searchContact works when contacts is correct")
+        public void testSearchContactWorksWhenContactsIsCorrect() {
+            // Arrange
+            // Act
+            // Assert
+        }
+    }
 }
