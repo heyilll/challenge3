@@ -60,7 +60,7 @@ As a user, I want to be able to edit an existing contact's information, so that 
 |             | Contact     | private String email <br> private String name <br> private String phoneNumber |                                          |       
 
 #### Test cases
-1. Test that given an existing contact, the contact details can be changed and updated to the address book
+1. Test that given an existing contact, the new contact is updated to the address book
 2. Test with a contact that hasn't been added to the address book before.
 
 As a user, I want to be able to view a list of all my contacts, so that I can easily browse and find the contacts I need.

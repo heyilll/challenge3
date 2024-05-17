@@ -207,7 +207,7 @@ public class AddressBookTest {
         }
 
         @Test
-        @DisplayName("Test editContact works when contacts is correct")
+        @DisplayName("Test getAllContacts works when contacts is correct")
         public void testGetAllContactsWorksWhenContactsIsCorrect() {
             // Arrange
             // Act
@@ -216,7 +216,7 @@ public class AddressBookTest {
         }
 
         @Test
-        @DisplayName("Test editContact works when contacts is empty")
+        @DisplayName("Test getAllContacts works when contacts is empty")
         public void testGetAllContactsWorksWhenContactsIsEmpty() {
             // Arrange
             List<Contact> testContacts = new ArrayList<>();
@@ -260,7 +260,11 @@ public class AddressBookTest {
             when(contact.getEmail()).thenReturn("example@e.com");
             // Act
             // Assert
-            assertEquals(contact.getName(), testAddressBook.searchContact("John Smith").getName());
+            assertAll(
+                    () -> assertEquals(contact.getName(), testAddressBook.searchContact("John Smith").get(0).getName()),
+                    () -> assertEquals(1, testAddressBook.searchContact("John Smith").size())
+            );
+
         }
 
         @Test

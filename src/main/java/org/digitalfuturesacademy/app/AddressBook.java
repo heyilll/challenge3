@@ -34,14 +34,15 @@ public class AddressBook {
         addContact(newcontact);
     }
 
-    public Contact searchContact(String name) {
+    public List<Contact> searchContact(String name) {
         checkEmpty();
-        for (Contact i: contacts) {
-            if (i.getName().equals(name)) {
-                return i;
+        List<Contact> searchedContacts = new ArrayList<>();
+        for (Contact contact: contacts) {
+            if (contact.getName().equals(name)) {
+                searchedContacts.add(contact);
             }
         }
-        throw new NoSuchElementException("No such contact found.");
+        return searchedContacts;
     }
 
     private void checkEmpty() {
