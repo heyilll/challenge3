@@ -24,9 +24,7 @@ public class AddressBookTest {
             AddressBook testAddressBook = new AddressBook();
             // Act
             // Assert
-            assertAll(
-                    () -> assertEquals(0, testAddressBook.getContacts().size())
-            );
+            assertEquals(0, testAddressBook.getContacts().size());
         }
     }
 
@@ -53,6 +51,56 @@ public class AddressBookTest {
             testAddressBook.addContact(contact);
             // Assert
             assertEquals(1, testAddressBook.getContacts().size());
+        }
+
+        @Test
+        @DisplayName("Address Book Duplicate Tests")
+        public void testAddContactPreventsDuplicateContactsPhoneNumbers() {
+            // Arrange
+            Contact contact = mock(Contact.class);
+            when(contact.getName()).thenReturn("John Smith");
+            when(contact.getPhoneNumber()).thenReturn("07912345678");
+            when(contact.getEmail()).thenReturn("example@e.com");
+            List<Contact> testContacts = new ArrayList<>();
+            testContacts.add(contact);
+
+            testAddressBook.setContacts(testContacts);
+
+            Contact newcontact = mock(Contact.class);
+            when(newcontact.getName()).thenReturn("John Smith");
+            when(newcontact.getPhoneNumber()).thenReturn("07912345678");
+            when(newcontact.getEmail()).thenReturn("different@example.com");
+
+            // Act
+            // Assert
+            assertThrows(IllegalArgumentException.class, () -> {
+                testAddressBook.addContact(newcontact);
+            });
+        }
+
+        @Test
+        @DisplayName("Address Book Duplicate Tests")
+        public void testAddContactPreventsDuplicateContactsEmails() {
+            // Arrange
+            Contact contact = mock(Contact.class);
+            when(contact.getName()).thenReturn("John Smith");
+            when(contact.getPhoneNumber()).thenReturn("07912345678");
+            when(contact.getEmail()).thenReturn("example@e.com");
+            List<Contact> testContacts = new ArrayList<>();
+            testContacts.add(contact);
+
+            testAddressBook.setContacts(testContacts);
+
+            Contact newcontact = mock(Contact.class);
+            when(newcontact.getName()).thenReturn("John Smith");
+            when(newcontact.getPhoneNumber()).thenReturn("07987654321");
+            when(newcontact.getEmail()).thenReturn("example@e.com");
+
+            // Act
+            // Assert
+            assertThrows(IllegalArgumentException.class, () -> {
+                testAddressBook.addContact(newcontact);
+            });
         }
     }
 
@@ -92,6 +140,9 @@ public class AddressBookTest {
         @DisplayName("Test removeContact throws exception when contacts is empty")
         public void testRemoveContactThrowsExceptionWhenContactsIsEmpty() {
             // Arrange
+            List<Contact> testContacts = new ArrayList<>();
+            testAddressBook.setContacts(testContacts);
+
             Contact contact = mock(Contact.class);
             when(contact.getName()).thenReturn("John Smith");
             when(contact.getPhoneNumber()).thenReturn("07912345678");
@@ -101,6 +152,19 @@ public class AddressBookTest {
             assertThrows(NoSuchElementException.class, () -> {
                 testAddressBook.removeContact(contact);
             });
+        }
+
+        @Test
+        @DisplayName("Test removeContact does nothing when contact does not exist")
+        public void testRemoveContactDoesNothingWhenContactDoesNotExist() {
+            // Arrange
+            Contact contact = mock(Contact.class);
+            when(contact.getName()).thenReturn("John Smith");
+            when(contact.getPhoneNumber()).thenReturn("07912345678");
+            when(contact.getEmail()).thenReturn("example@e.com");
+            // Act
+            // Assert
+            assertEquals(1, testAddressBook.getContacts().size());
         }
     }
 
@@ -133,8 +197,8 @@ public class AddressBookTest {
 
             Contact testContact = mock(Contact.class);
             when(testContact.getName()).thenReturn("John Smith");
-            when(testContact.getPhoneNumber()).thenReturn("07912345678");
-            when(testContact.getEmail()).thenReturn("example@e.com");
+            when(testContact.getPhoneNumber()).thenReturn("07987654321");
+            when(testContact.getEmail()).thenReturn("different@example.com");
             // Act
             testAddressBook.editContact(contact, testContact);
             // Assert
@@ -174,6 +238,27 @@ public class AddressBookTest {
             when(testContact.getName()).thenReturn("ssssssssssssss");
             when(testContact.getPhoneNumber()).thenReturn("ssssssssssssss");
             when(testContact.getEmail()).thenReturn("ssssssssssssssssssssss");
+            // Act
+            // Assert
+            assertThrows(IllegalArgumentException.class, () -> {
+                testAddressBook.editContact(contact, testContact);
+            });
+        }
+
+        @Test
+        @DisplayName("Test editContact works when old contact does not exist")
+        public void testEditContactWorksWhenOldContactDoesNotExist() {
+            // Arrange
+            Contact contact = mock(Contact.class);
+            when(contact.getName()).thenReturn("Smith Smith");
+            when(contact.getPhoneNumber()).thenReturn("07956781234");
+            when(contact.getEmail()).thenReturn("example@example.com");
+
+            Contact testContact = mock(Contact.class);
+            when(testContact.getName()).thenReturn("John Smith");
+            when(testContact.getPhoneNumber()).thenReturn("07912345678");
+            when(testContact.getEmail()).thenReturn("example@e.com");
+
             // Act
             // Assert
             assertThrows(IllegalArgumentException.class, () -> {
@@ -264,12 +349,11 @@ public class AddressBookTest {
                     () -> assertEquals(contact.getName(), testAddressBook.searchContact("John Smith").get(0).getName()),
                     () -> assertEquals(1, testAddressBook.searchContact("John Smith").size())
             );
-
         }
 
         @Test
-        @DisplayName("Test searchContact works when contacts is empty")
-        public void testSearchContactWorksWhenContactsIsEmpty() {
+        @DisplayName("Test searchContact throws an exception when contacts is empty")
+        public void testSearchContactThrowsExceptionWhenContactsIsEmpty() {
             // Arrange
             List<Contact> testContacts = new ArrayList<>();
             testAddressBook.setContacts(testContacts);
@@ -278,6 +362,15 @@ public class AddressBookTest {
             assertThrows(NoSuchElementException.class, () -> {
                 testAddressBook.searchContact("John Smith");
             });
+        }
+
+        @Test
+        @DisplayName("Test searchContact throws an exception when the contact does not exist")
+        public void testSearchContactReturnsWhenContactDoesNotExist() {
+            // Arrange
+            // Act
+            // Assert
+            assertTrue(testAddressBook.searchContact("Clive Staples Lewis").isEmpty());
         }
     }
 

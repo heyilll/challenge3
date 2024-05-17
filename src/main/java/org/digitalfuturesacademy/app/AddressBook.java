@@ -17,19 +17,26 @@ public class AddressBook {
 
     public void addContact(Contact contact) {
         Validator.validateContact(contact);
+        if (checkDuplicate(contact)) {
+            throw new IllegalArgumentException("Email address or phone number already exists in the address book");
+        }
         this.contacts.add(contact);
     }
 
     public void removeContact(Contact contact) {
         checkEmpty();
         Validator.validateContact(contact);
-        this.contacts.remove(contact);
+        this.contacts.removeIf(existingContact -> existingContact.getPhoneNumber().equals(contact.getPhoneNumber())
+                && existingContact.getEmail().equals(contact.getEmail()));
     }
 
     public void editContact(Contact oldcontact, Contact newcontact) {
         checkEmpty();
         Validator.validateContact(oldcontact);
         Validator.validateContact(newcontact);
+        if (!checkDuplicate(oldcontact)) {
+            throw new IllegalArgumentException("Contact does not exist in the address book.");
+        }
         removeContact(oldcontact);
         addContact(newcontact);
     }
@@ -49,6 +56,15 @@ public class AddressBook {
         if (contacts.isEmpty()) {
             throw new NoSuchElementException("No contacts stored.");
         }
+    }
+
+    private boolean checkDuplicate(Contact contact) {
+        for (Contact existingContact : contacts) {
+            if (existingContact.getEmail().contains(contact.getEmail()) || existingContact.getPhoneNumber().contains(contact.getPhoneNumber())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public List<Contact> getAllContacts() {
