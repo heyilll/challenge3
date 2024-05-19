@@ -24,10 +24,10 @@ All benefits listed above contributes to a great impact on any customer's busine
 
 As a user, I want to validate a new contact has fields of at least a name, phone number and email address, so that I can store contacts in the correct format.
 
-| Requirement | Objects   | Properties                                                                    | Methods                                                                                                                                                                   |
-|-------------|-----------|-------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 1           | Validator |                                                                               | public static void validateContact(Contact contact) <br> private static void validateEmail(Contact contact) <br> private static void validatePhoneNumber(Contact contact) |
-|             | Contact   | private String email <br> private String name <br> private String phoneNumber |                                                                                                                                                                           |
+| Requirement | Objects   | Properties                                                                    | Methods                                              |
+|-------------|-----------|-------------------------------------------------------------------------------|------------------------------------------------------|
+| 1           | Validator |                                                                               | public static void validateContact(Contact contact)  |
+|             | Contact   | private String email <br> private String name <br> private String phoneNumber |                                                      |
 
 #### Test cases
 1. Test that validateContact throws an exception when contacts with null, empty or incorrect values are passed
