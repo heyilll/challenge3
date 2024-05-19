@@ -11,10 +11,6 @@ public class AddressBook {
         this.contacts = new ArrayList<>();
     }
 
-    public AddressBook(List<Contact> contacts) {
-        this.contacts = contacts;
-    }
-
     public void addContact(Contact contact) {
         Validator.validateContact(contact);
         if (checkDuplicate(contact)) {

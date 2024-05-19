@@ -11,7 +11,8 @@ public class ConsoleUI {
         System.out.println("2. Edit contact");
         System.out.println("3. Remove contact");
         System.out.println("4. View all contacts");
-        System.out.println("5. Exit");
+        System.out.println("5. Search for contacts");
+        System.out.println("6. Exit");
     }
 
     public static void handleChoice(AddressBook addressBook, Scanner scanner, String choice) {
@@ -33,6 +34,9 @@ public class ConsoleUI {
                 displayContacts(addressBook.getAllContacts());
                 break;
             case "5":
+                displayContacts(searchContacts(addressBook, scanner));
+                break;
+            case "6":
                 System.out.println("Exiting...");
                 System.exit(0);
                 break;
@@ -60,6 +64,15 @@ public class ConsoleUI {
         String email = scanner.nextLine();
 
         return new Contact(name, phoneNumber, email);
+    }
+
+    private static List<Contact> searchContacts(AddressBook addressBook, Scanner scanner) {
+        System.out.println("Enter a name to search for...");
+
+        System.out.print("Name: ");
+        String name = scanner.nextLine();
+
+        return addressBook.searchContact(name);
     }
 }
 

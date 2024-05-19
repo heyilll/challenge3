@@ -41,7 +41,8 @@ public class ConsoleUITest {
                     () -> assertTrue(consoleOutput.contains("2. Edit contact")),
                     () -> assertTrue(consoleOutput.contains("3. Remove contact")),
                     () -> assertTrue(consoleOutput.contains("4. View all contacts")),
-                    () -> assertTrue(consoleOutput.contains("5. Exit")));
+                    () -> assertTrue(consoleOutput.contains("5. Search for contacts")),
+                    () -> assertTrue(consoleOutput.contains("6. Exit")));
         }
     }
 
@@ -122,6 +123,23 @@ public class ConsoleUITest {
 
             // Act
             ConsoleUI.handleChoice(addressBook, scanner, "4");
+
+            //Assert
+            String consoleOutput = outputStreamCaptor.toString().trim();
+            assertTrue(consoleOutput.contains("Name: John Smith, Phone Number: 07123456789, Email: john.smith@example.com"));
+        }
+
+        @Test
+        @DisplayName("Handles Choice of Search")
+        public void testHandleChoiceSearch() {
+            // Arrange
+            System.setOut(new PrintStream(outputStreamCaptor));
+
+            scanner = mock(Scanner.class);
+            when(scanner.nextLine()).thenReturn("John Smith");
+
+            // Act
+            ConsoleUI.handleChoice(addressBook, scanner, "5");
 
             //Assert
             String consoleOutput = outputStreamCaptor.toString().trim();
