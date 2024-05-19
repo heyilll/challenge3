@@ -373,18 +373,4 @@ public class AddressBookTest {
             assertTrue(testAddressBook.searchContact("Clive Staples Lewis").isEmpty());
         }
     }
-
-    @Nested
-    @DisplayName("Address Book Console Interface Tests")
-    class AddressBookConsoleInterfaceTests {
-        private AddressBook testAddressBook;
-
-        @Test
-        @DisplayName("Test ConsoleInterfaceWorks")
-        public void testConsoleInterfaceWorks() {
-            // Arrange
-            // Act
-            // Assert
-        }
-    }
 }

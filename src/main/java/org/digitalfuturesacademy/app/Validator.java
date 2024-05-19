@@ -15,7 +15,7 @@ public class Validator {
         if (contact.getName() == null || contact.getName().isBlank()) {
             throw new IllegalArgumentException("Name cannot be null or empty");
         } else if(!contact.getName().matches("^[a-zA-z ]*$")) {
-            throw new IllegalArgumentException("Name must be in the form of a name");
+            throw new IllegalArgumentException("Name must use only letters or spaces");
         }
     }
 
@@ -31,7 +31,7 @@ public class Validator {
         if (contact.getPhoneNumber() == null || contact.getPhoneNumber().isBlank()) {
             throw new IllegalArgumentException("Phone number cannot be null or empty");
         } else if(!contact.getPhoneNumber().matches("07+[0-9]{9}")) {
-            throw new IllegalArgumentException("Phone number must be in the form of 0712345678");
+            throw new IllegalArgumentException("Phone number must be in the form of 07123456789");
         }
     }
 }

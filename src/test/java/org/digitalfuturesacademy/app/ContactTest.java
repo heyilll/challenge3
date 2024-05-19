@@ -28,7 +28,5 @@ public class ContactTest {
                     () -> assertEquals(testPhoneNumber, testContact.getPhoneNumber()),
                     () -> assertEquals(testEmail, testContact.getEmail()));
         }
-
-
     }
 }
