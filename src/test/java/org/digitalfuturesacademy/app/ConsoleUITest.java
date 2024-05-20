@@ -12,8 +12,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class ConsoleUITest {
     private static final AddressBook addressBook = new AddressBook();
@@ -144,6 +143,21 @@ public class ConsoleUITest {
             //Assert
             String consoleOutput = outputStreamCaptor.toString().trim();
             assertTrue(consoleOutput.contains("Name: John Smith, Phone Number: 07123456789, Email: john.smith@example.com"));
+        }
+
+        @Test
+        @DisplayName("Handles Choice of Exit")
+        public void testHandleChoiceExit() {
+            // Arrange
+            System.setOut(new PrintStream(outputStreamCaptor));
+
+            scanner = mock(Scanner.class);
+
+            // Act
+            ConsoleUI.handleChoice(addressBook, scanner, "6");
+
+            //Assert
+            verify(scanner).close();
         }
     }
 }

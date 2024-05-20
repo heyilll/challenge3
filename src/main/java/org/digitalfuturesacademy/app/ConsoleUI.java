@@ -38,7 +38,7 @@ public class ConsoleUI {
                 break;
             case "6":
                 System.out.println("Exiting...");
-                System.exit(0);
+                scanner.close();
                 break;
             default:
                 System.out.println("Invalid choice");
