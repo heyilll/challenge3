@@ -41,7 +41,7 @@ public class AddressBook {
         checkEmpty();
         List<Contact> searchedContacts = new ArrayList<>();
         for (Contact contact: contacts) {
-            if (contact.getName().toLowerCase().contains(name) || contact.getName().toUpperCase().contains(name) || contact.getName().contains(name)) {
+            if (contact.getName().toLowerCase().contains(name.toLowerCase()) || contact.getName().toUpperCase().contains(name) || contact.getName().contains(name)) {
                 searchedContacts.add(contact);
             }
         }
