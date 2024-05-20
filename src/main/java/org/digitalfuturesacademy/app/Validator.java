@@ -2,7 +2,7 @@ package org.digitalfuturesacademy.app;
 
 public class Validator {
     public static void validateContact(Contact contact) {
-        if(contact == null || contact.toString().isEmpty()) {
+        if(contact == null) {
             throw new IllegalArgumentException("Contact cannot be null or empty");
         } else {
             validateName(contact);

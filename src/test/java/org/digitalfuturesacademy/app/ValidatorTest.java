@@ -77,7 +77,7 @@ public class ValidatorTest {
             Contact contact = mock(Contact.class);
             when(contact.getName()).thenReturn("John Smith");
             when(contact.getPhoneNumber()).thenReturn(null);
-            when(contact.getEmail()).thenReturn("");
+            when(contact.getEmail()).thenReturn("example@e.com");
             // Act
             // Assert
             assertThrows(IllegalArgumentException.class, () -> {
